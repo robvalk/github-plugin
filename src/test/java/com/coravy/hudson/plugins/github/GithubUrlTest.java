@@ -44,4 +44,16 @@ public class GithubUrlTest {
                 "http://github.com/juretta/hudson-github-plugin/commit/5e31203faea681c41577b685818a361089fac1fc",
                 url.commitId("5e31203faea681c41577b685818a361089fac1fc"));
     }
+
+    @Test
+    public final void testBaseUrlWithTreeInProjectName() {
+        GithubUrl url = new GithubUrl(
+                "http://github.com/greentree/somereop");
+        assertEquals("http://github.com/greentree/somereop/", url
+                .baseUrl());
+        url = new GithubUrl(
+                "http://github.com/greentree/somereop/tree/unstable");
+        assertEquals("http://github.com/greentree/somereop/", url
+                .baseUrl());
+    }
 }

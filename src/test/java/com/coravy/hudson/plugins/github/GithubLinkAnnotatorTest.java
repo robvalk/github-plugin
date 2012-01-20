@@ -12,17 +12,36 @@ public class GithubLinkAnnotatorTest {
     @Test
     public final void testAnnotateStringMarkupText() {
         assertAnnotatedTextEquals("An issue Closes #1 link",
-                "An issue <a href='" + GITHUB_URL
-                        + "issues/1/find'>Closes #1</a> link");
+                "An issue Closes <a href='" + GITHUB_URL
+                        + "issues/1'>#1</a> link");
         assertAnnotatedTextEquals("An issue Close #1 link",
-                "An issue <a href='" + GITHUB_URL
-                        + "issues/1/find'>Close #1</a> link");
+                "An issue Close <a href='" + GITHUB_URL
+                        + "issues/1'>#1</a> link");
         assertAnnotatedTextEquals("An issue closes #123 link",
-                "An issue <a href='" + GITHUB_URL
-                        + "issues/123/find'>closes #123</a> link");
+                "An issue closes <a href='" + GITHUB_URL
+                        + "issues/123'>#123</a> link");
         assertAnnotatedTextEquals("An issue close #9876 link",
-                "An issue <a href='" + GITHUB_URL
-                        + "issues/9876/find'>close #9876</a> link");
+                "An issue close <a href='" + GITHUB_URL
+                        + "issues/9876'>#9876</a> link");
+
+        assertAnnotatedTextEquals("An issue fixes #9876 link",
+                "An issue fixes <a href='" + GITHUB_URL
+                        + "issues/9876'>#9876</a> link");
+
+        assertAnnotatedTextEquals("An issue fixed #9876 link",
+                "An issue fixed <a href='" + GITHUB_URL
+                        + "issues/9876'>#9876</a> link");
+
+        assertAnnotatedTextEquals("An issue will fix #9876 link",
+                "An issue will fix <a href='" + GITHUB_URL
+                        + "issues/9876'>#9876</a> link");
+    }
+
+    @Test
+    public final void testGHIssueLinks() {
+        assertAnnotatedTextEquals("An issue will fix gh-9876 link",
+                "An issue will fix <a href='" + GITHUB_URL
+                        + "issues/9876'>gh-9876</a> link");
     }
 
     private void assertAnnotatedTextEquals(final String originalText,

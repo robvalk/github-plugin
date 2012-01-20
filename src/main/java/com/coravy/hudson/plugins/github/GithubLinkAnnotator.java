@@ -71,7 +71,8 @@ public class GithubLinkAnnotator extends ChangeLogAnnotator {
                 .compile("ANYWORD");
     }
 
+    // Github commits can mention issues without closing them. We want to link these too.
     private static final LinkMarkup[] MARKUPS = new LinkMarkup[] { new LinkMarkup(
-            "(?:C|c)lose(?:s?)\\s(?<!\\:)(?:#)NUM", // "Closes #123"
-            "issues/$1/find") };
+            "(?:#|gh-)NUM", // " #123"
+            "issues/$1") };
 }

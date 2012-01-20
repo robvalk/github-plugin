@@ -21,8 +21,8 @@ public final class GithubUrl {
             return null;
         }
         // Strip "tree/..."
-        if (url.contains("tree/")) {
-            url = url.replaceFirst("tree/.*$", "");
+        if (url.contains("/tree/")) {
+            url = url.replaceFirst("/tree/.*$", "");
         }
         if (!url.endsWith("/")) {
             url += '/';
